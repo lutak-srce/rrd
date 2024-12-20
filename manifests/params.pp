@@ -12,7 +12,7 @@ class rrd::params {
   $cache_restrict_writes  = false
   $cache_maxwait          = '30'
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian':{
       $lib_package      = ['librrd4','librrd-dev']
       $tool_package     = 'rrdtool'
@@ -38,7 +38,7 @@ class rrd::params {
       $cache_service    = 'rrdcached'
     }
     default:{
-      fail("The OS family ${::osfamily} is not supported by the rrd module.")
+      fail("The OS family ${facts['os']['family']} is not supported by the rrd module.")
     }
   }
 }
